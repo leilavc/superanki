@@ -1,0 +1,36 @@
+- [ ] Backend
+  - [ ] Install Jieba
+  - [ ] Write helpful file that takes Chinese and spits out segmented words
+  - [ ] Create database format for words/passages
+    - ORM:
+      - user - word - proficiency - sentences
+      - sentence - words - proficiency
+    - Types: user, word, proficiency, sentence, passage. Several
+      many-to-many. For now, stick to sentences.
+  - [ ] API that receives a character and spits back definition
+  - [ ] API that spits back thing to test
+  - [ ] API that gets user input on a word/sentence and updates proficiencies
+- [ ] Frontend
+  - [ ] Interface for user to submit sentences (and have these dumped to backend)
+  - [ ] Interface for testing words
+  - [ ] Interface for testing sentences
+  - [ ] Front-end API for getting next thing to be tested
+
+* Stage one: 
+- [ ] User enters sentence.
+- [ ] Sentence is sent to backend and tokenized.
+- [ ] Each token is create_or_added to a word.
+- [ ] Sentence is returned with links to each word.
+- [ ] (Optional: each word shows the sentences it's associated with).
+
+Python: 
+ - routes.py:
+   - [X] sentence -> json
+   - [ ] word -> json
+   - [ ] input -> json
+
+React: 
+ - [X] front end input
+ - [ ] Sentence: ([tokens, proficiency, id]) -> flashcard-style, linked-up words
+ - [ ] ProficiencyLink: (proficiency, text, url) -> colored link
+ - [ ] Word: (chinese, english) -> flashcard-style
