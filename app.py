@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 import jieba
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://127.0.0.1:27017/superanki"
@@ -21,6 +22,11 @@ def sentence_add():
       token_id = token['_id']
     token_return.append({"text": token_text, "id": str(token_id)})
   return jsonify(token_return)
+
+@app.route('/word/<string:word_id>/')
+def words_show(word_id):
+  word = mongo.db.tokens.find_one({'_id': ObjectId(word_id)})
+  return jsonify({"text": word['text']})
 
 if __name__ == '__main__':
   jieba.initialize() 
