@@ -17,17 +17,17 @@
   - [ ] Front-end API for getting next thing to be tested
 
 * Stage one: 
-- [ ] User enters sentence.
-- [ ] Sentence is sent to backend and tokenized.
-- [ ] Each token is create_or_added to a word.
-- [ ] Sentence is returned with links to each word.
+- [X] User enters sentence.
+- [X] Sentence is sent to backend and tokenized.
+- [X] Each token is create_or_added to a word.
+- [X] Sentence is returned with links to each word.
 - [ ] (Optional: each word shows the sentences it's associated with).
-
+xb
 Python: 
  - routes.py:
-   - [X] sentence -> json
-   - [ ] word -> json
-   - [ ] input -> json
+   - [ ] sentence -> json
+   - [X] word -> json
+   - [X] input -> json
 
 React: 
  - [X] front end input

@@ -13,8 +13,9 @@ def hello_world():
 
 @app.route('/sentence/add', methods=["POST"])
 def sentence_add():
+  content = request.json
   token_return = []
-  for token_text in jieba.cut(request.form['sentence']):
+  for token_text in jieba.cut(content['sentence']):
     token = mongo.db.tokens.find_one({'text': token_text})
     if token is None:
       token_id = mongo.db.tokens.insert_one({'text': token_text}).inserted_id
