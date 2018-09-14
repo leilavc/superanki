@@ -2,12 +2,23 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Sentence from './Sentence.js';
+import LinkedSentence from '../containers/LinkedSentence.js';
+import FocusedWords from '../containers/FocusedWords.js';
+import ConfirmSentenceButton from '../containers/ConfirmSentenceButton.js';
+import AjaxSentence from '../components/AjaxSentence.js';
+import RecentSentences from '../components/RecentSentences.js';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
   },
   button: {
     margin: theme.spacing.unit,
@@ -41,7 +52,6 @@ class SentenceInput extends React.Component {
   }
 
   handleSubmit = (e) => {
-
     e.preventDefault();
 
     fetch('/sentence/add', {
@@ -91,12 +101,28 @@ class SentenceInput extends React.Component {
 	  >
 	  Submit
         </Button>
+	<RecentSentences />
 	</div>
     );
   }
 
   renderSentence() {
-    return (<Sentence children={this.state.children} />);
+    const { classes } = this.props;
+    return (
+	<div className={classes.root}>
+	  <Grid container spacing={24}>
+	    <Grid item xs={3}>
+	       <Paper className={classes.paper}>
+	          <FocusedWords />
+	       </Paper>
+	    </Grid>
+	    <Grid item xs={9}>
+	      <LinkedSentence children={this.state.children} />
+	      <ConfirmSentenceButton tokenized_sentence={this.state.children} />
+	    </Grid>
+	</Grid>
+      </div>
+    );
   }
 
   render() {

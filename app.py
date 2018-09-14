@@ -24,8 +24,28 @@ def sentence_add():
     token_return.append({"text": token_text, "id": str(token_id)})
   return jsonify(token_return)
 
+@app.route('/sentence/confirm', methods=["POST"])
+def sentence_confirm():
+  content = request.json # json format: {'word_ids', 'tokenized_sentence'}
+  print(content)
+  sentence_id = mongo.db.sentences.insert_one({'tokenized': content['tokenized_sentence']}).inserted_id
+  for word_id in content['word_ids']:
+    word = mongo.db.tokens.find_one_and_update({'_id': ObjectId(word_id)}, {'$set': {'proficiency': 0}})
+  return jsonify({'status': 'done', 'sentence_id': str(sentence_id)})
+
+@app.route('/sentence/newest/')
+def sentence_newest():
+  sentence_ids = mongo.db.sentences.aggregate([{'$sample': {'size': 3 }}])
+  return jsonify({"sentence_ids": [str(sentence_id['_id']) for sentence_id in sentence_ids]})
+
+@app.route('/sentence/id/<string:sentence_id>/')
+def sentence_show(sentence_id):
+  sentence = mongo.db.sentences.find_one({'_id': ObjectId(sentence_id)})
+  print(sentence)
+  return jsonify({"tokenized_sentence": sentence['tokenized']})
+  
 @app.route('/word/<string:word_id>/')
-def words_show(word_id):
+def word_show(word_id):
   word = mongo.db.tokens.find_one({'_id': ObjectId(word_id)})
   return jsonify({"text": word['text']})
 

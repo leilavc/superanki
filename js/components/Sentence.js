@@ -29,6 +29,7 @@ class Sentence extends React.Component {
     new_colors[word_id] = this.props.classes.word_clicked;
     console.log(new_colors);
     this.setState({colors: new_colors});
+    this.props.addFocusWord(word_id);    
   }
 
   render () {
