@@ -1,4 +1,6 @@
-var webpack = require('webpack');  
+var webpack = require('webpack');
+var FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 module.exports = {  
   entry: [
     "./js/app.js"
@@ -14,5 +16,9 @@ module.exports = {
         exclude: /node_modules/
     }]},
   plugins: [
-  ]
+    new FriendlyErrorsWebpackPlugin(),
+  ],
+  stats: {
+    modules: false,
+  },
 };
