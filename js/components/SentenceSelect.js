@@ -1,5 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import FocusedWords from '../containers/FocusedWords.js';
+import LinkedSentence from '../containers/LinkedSentence.js';
+import ConfirmSentenceButton from '../containers/ConfirmSentenceButton.js';
 
 const styles = theme => ({
   paper: {

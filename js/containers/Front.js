@@ -13,6 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   moveToSelect : (children) => {
+    console.log("Move to select");
     dispatch(setSentence(children));
     dispatch(setEdit());
   }

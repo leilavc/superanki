@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { update } from 'immutability-helper';
 import _ from 'lodash';
@@ -49,4 +50,12 @@ class Sentence extends React.Component {
   }
 };
 
+Sentence.propTypes = {
+  children: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  }).isRequired,
+};
+
 export default withStyles(styles)(Sentence);
+

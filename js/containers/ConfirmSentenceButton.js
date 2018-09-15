@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { clearFocusWords } from '../actions';
+import { clearFocusWords, clearSentence, setMain } from '../actions';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
@@ -27,7 +27,7 @@ class SaveButton extends React.Component {
 	return response.json();
       })
       .then((json) => {
-	console.log(json);
+	console.log(this.props);
 	this.props.moveToMain();
       });
   }
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(SaveButton));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SaveButton));
