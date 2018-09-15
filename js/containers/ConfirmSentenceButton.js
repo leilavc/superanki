@@ -28,6 +28,7 @@ class SaveButton extends React.Component {
       })
       .then((json) => {
 	console.log(json);
+	this.props.moveToMain();
       });
   }
   
@@ -49,7 +50,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearFocusWords: () => dispatch(clearFocusWords())
+  moveToMain : () => {
+    dispatch(clearSentence());
+    dispatch(clearFocusWords());
+    dispatch(setMain());
+  }
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(SaveButton));

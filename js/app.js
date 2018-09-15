@@ -1,7 +1,7 @@
 import Hello from './Hello';
 import React from 'react';
 import { render } from 'react-dom';
-import SentenceInput from './components/SentenceInput.js';
+import Front from './containers/Front.js';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import wordApp from './reducers';
@@ -13,7 +13,7 @@ const store = createStore(
 
 render(
   (<Provider store={store}>
-     <SentenceInput />
+     <Front />
    </Provider>)
   , document.getElementById('reactEntry')
 )

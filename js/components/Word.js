@@ -12,7 +12,7 @@ class Word extends React.Component {
   }
 
   componentDidMount() {
-    fetch("/word/" + this.props.word_id)
+    fetch("/word/id/" + this.props.word_id)
       .then(res => res.json())
       .then(
 	(result) => {

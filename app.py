@@ -44,10 +44,17 @@ def sentence_show(sentence_id):
   print(sentence)
   return jsonify({"tokenized_sentence": sentence['tokenized']})
   
-@app.route('/word/<string:word_id>/')
+@app.route('/word/id/<string:word_id>/')
 def word_show(word_id):
   word = mongo.db.tokens.find_one({'_id': ObjectId(word_id)})
   return jsonify({"text": word['text']})
+
+@app.route('/word/study/<string:word_id>/')
+def word_study(word_id):
+  word = mongo.db.tokens.find_one({'_id': ObjectId(word_id)})
+  study_sentence_id = random.choice(word['study_sentence_ids'])
+  study_sentence = mongo.db.sentences.find_one({'_id': ObjectId(study_sentence_id)})
+  return jsonify({"text": word['text'], 'sentence': study_sentence['tokenized']})
 
 if __name__ == '__main__':
   jieba.initialize() 

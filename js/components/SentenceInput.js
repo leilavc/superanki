@@ -68,13 +68,14 @@ class SentenceInput extends React.Component {
 	return response.json();
       })
       .then((json) => {
-	this.setState({children: json, filled: true});
+	console.log(json);
+	this.props.moveToSelect(json);
       });
     
     return false;
   }
 
-  renderForm() {
+  render() {
     const { classes } = this.props;
     const { sentence } = this.state;
 
@@ -104,34 +105,6 @@ class SentenceInput extends React.Component {
 	<RecentSentences />
 	</div>
     );
-  }
-
-  renderSentence() {
-    const { classes } = this.props;
-    return (
-	<div className={classes.root}>
-	  <Grid container spacing={24}>
-	    <Grid item xs={3}>
-	       <Paper className={classes.paper}>
-	          <FocusedWords />
-	       </Paper>
-	    </Grid>
-	    <Grid item xs={9}>
-	      <LinkedSentence children={this.state.children} />
-	      <ConfirmSentenceButton tokenized_sentence={this.state.children} />
-	    </Grid>
-	</Grid>
-      </div>
-    );
-  }
-
-  render() {
-    if (!this.state.filled) {
-      return this.renderForm();
-    }
-    else {
-      return this.renderSentence();
-    }
   }
 };
 
