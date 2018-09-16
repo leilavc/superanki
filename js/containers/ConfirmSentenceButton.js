@@ -12,7 +12,6 @@ const styles = theme => ({
 
 class SaveButton extends React.Component {
   handleClick = (e) => {
-    console.log(this.props.focusWords);
     fetch('/sentence/confirm', {
       method: 'POST',
       headers: {
@@ -27,7 +26,6 @@ class SaveButton extends React.Component {
 	return response.json();
       })
       .then((json) => {
-	console.log(this.props);
 	this.props.moveToMain();
       });
   }

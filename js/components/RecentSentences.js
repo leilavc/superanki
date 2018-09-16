@@ -41,8 +41,7 @@ class RecentSentences extends React.Component {
     return (
 	<div>
 	{_.map(this.state.sentence_ids, (sentence_id) => {
-	  console.log(sentence_id);
-	  return (<Paper className={classes.paper}>
+	  return (<Paper className={classes.paper} key={sentence_id}>
 		  <AjaxSentence sentence_id={sentence_id} />
 		  </Paper>);
 	})}

@@ -1,14 +1,15 @@
 import React from 'react';
+import keyIndex from 'react-key-index';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { update } from 'immutability-helper';
 import _ from 'lodash';
 
 const styles = theme => ({
-  word_clicked : {
+  red : {
     color: 'red'
   },
-  word_default : {
+  black : {
     color: 'black'
   }
 });
@@ -18,11 +19,10 @@ class Sentence extends React.Component {
     super(props);
 
     var colors = {};
-    for (const child in this.props.children) {
-      colors[this.props.children[child].id] = this.props.classes.word_default;
+    for (const word_id in this.props.redWords) {
+      colors[word_id] = this.props.classes.word_clicked;
     };
     this.state = { colors: colors };
-    console.log(this.state);
   }
 
   render () {
@@ -32,8 +32,10 @@ class Sentence extends React.Component {
 	    { _.map(this.props.children, 
 		    (child) => 
 		    (<span 
-	             onClick={() => this.props.handleClick()}
+	             onClick={() => this.props.handleClick(child.id)}
 		     className = {colors[child.id]}
+		     id={child.id}
+		     key={child.key}
 		     >
 		     {child.text}
 		     </span>))
