@@ -24,14 +24,6 @@ class Sentence extends React.Component {
     this.state = { colors: colors };
     console.log(this.state);
   }
-  
-  handleClick = (word_id) => {
-    var new_colors = {...this.state.colors};
-    new_colors[word_id] = this.props.classes.word_clicked;
-    console.log(new_colors);
-    this.setState({colors: new_colors});
-    this.props.addFocusWord(word_id);    
-  }
 
   render () {
     const colors = this.state.colors;
@@ -40,7 +32,7 @@ class Sentence extends React.Component {
 	    { _.map(this.props.children, 
 		    (child) => 
 		    (<span 
-	             onClick={() => this.handleClick(child.id)}
+	             onClick={() => this.props.handleClick()}
 		     className = {colors[child.id]}
 		     >
 		     {child.text}
@@ -51,11 +43,15 @@ class Sentence extends React.Component {
 };
 
 Sentence.propTypes = {
-  children: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
-  }).isRequired,
+  children: PropTypes.array,
+  handleClick: PropTypes.func
 };
+
+Sentence.defaultProps = {
+  children: [],
+  handleClick: (_) => { return false; }
+}
+
 
 export default withStyles(styles)(Sentence);
 
